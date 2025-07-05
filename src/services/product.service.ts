@@ -13,19 +13,19 @@ export const getProductById = (id:number):Product|undefined=>{
     // Logic to get product by ID
     return productList.find(product => product.id === id);
 }
-export const updateProduct = (id:number, updatedProduct:Product):Product|undefined=>{
-    const index = productList.findIndex(product => product.id === id);
-    if(index !== -1){
-        productList[index] = updatedProduct;
-        return updatedProduct;
+export const updateProduct = (id:number,data:Product)=>{
+    const product = productList.find(product => product.id === id);
+    if (!product) {
+        return null; // Product not found
     }
-    return undefined;
+    Object.assign(product, data);
+    return product;
 }
-export const deleteProduct = (id:string):boolean=>{
-    const index = productList.findIndex(product => product.id === id);
-    if(index !== -1){
-        productList.splice(index, 1);
-        return true;
-    }
-    return false;
+export const deleteProduct = (id:number)=>{
+   const index = productList.findIndex(product => product.id === id);
+   if (index === -1){
+       return false;
+   }
+   productList.splice(index, 1);
+   return true;
 }
