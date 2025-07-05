@@ -29,3 +29,9 @@ export const deleteProduct = (id:number)=>{
    productList.splice(index, 1);
    return true;
 }
+export const validateProduct= (product:Product) =>{
+    if (!product.id || !product.name || !product.price || !product.currency || !product.image) {
+        return 'All fields are required';
+    }
+    return null;
+}
