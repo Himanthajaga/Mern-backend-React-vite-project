@@ -30,7 +30,7 @@ userList.push(customerUser);
 export const authenticateUser = (username:string,password:string)=> {
     const existingUser:User | undefined = userList.find(user=> user.username === username);
 
-    let isValidPassword = bcrypt.compareSync(password,existingUser?.password) // Compare the provided password with the stored hashed password
+    let isValidPassword = undefined != existingUser && bcrypt.compareSync(password,existingUser.password) // Compare the provided password with the stored hashed password
     if (!existingUser || isValidPassword) {
         return null; // User not found
     }
