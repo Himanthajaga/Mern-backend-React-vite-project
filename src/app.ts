@@ -3,6 +3,7 @@ import express, {Request, Response} from "express";
 import productRoutes from "./routes/product-routes";
 import cors from 'cors';
 import contactRoutes from "./routes/contact-routes";
+import authRoutes from "./routes/auth.routes";
 const app = express();
 
 // Middleware to parse JSON bodies
@@ -23,6 +24,7 @@ const corsOptions = {
     }
 };
 app.use(cors(corsOptions));
+app.use("/api/auth",authRoutes);
 app.use("/api/products",productRoutes);
 app.use("/api/contact",contactRoutes);
 export default app;
