@@ -1,11 +1,11 @@
 import {Router} from "express";
 import {deleteProduct, getAllProducts, getProduct, saveProduct, updateProduct} from "../controllers/product.controller";
-const productRouter = Router();
-
+import {authorizeRoles} from "../middleware/auth.middleware";
+const productRouter:Router = Router();
 // Handle Requests
-productRouter.get("/all",getAllProducts );//GetAll
-productRouter.post("/save",saveProduct);//Save
-productRouter.get("/:id",getProduct);//Get by ID
-productRouter.put("/update/:id",updateProduct );//Update by ID
-productRouter.delete("/delete/:id", deleteProduct);//Delete by ID
+productRouter.get("/all", getAllProducts); // Get All
+productRouter.post("/save", authorizeRoles('admin'), saveProduct); // Save
+productRouter.get("/:id", getProduct);
+productRouter.put("/update/:id", authorizeRoles('admin'), updateProduct);
+productRouter.delete("/delete/:id", authorizeRoles('admin'), deleteProduct)
 export default productRouter;
